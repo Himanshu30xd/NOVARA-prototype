@@ -1,4 +1,5 @@
 import {useState,useEffect,useRef} from 'react'
+import {Link} from 'react-router-dom'
 import {X,MessageCircle} from 'lucide-react'
 import {WHATSAPP_NUMBER} from '../data'
 const FALLBACK='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 3"><rect width="4" height="3" fill="#13294b"/></svg>')
@@ -25,7 +26,7 @@ export function Modal({item,onClose}){
   <div className="mb">{item.cat&&<span className="tag">{item.cat}</span>}<h3>{item.title}</h3><p>{item.desc}</p>
   {item.details&&<ul>{item.details.map(d=><li key={d}>{d}</li>)}</ul>}
   {item.cat&&<p className="note">Demonstration content: fictional, for this prototype only.</p>}
-  {item.cat&&<a className="btn" href="#contact" onClick={onClose}>Request a quote</a>}</div></div></div>
+  {item.cat&&<Link className="btn" to="/contact" onClick={onClose}>Request a quote</Link>}</div></div></div>
 }
 export function WhatsApp(){
  const [tip,setTip]=useState(false);const ok=/^\d{8,15}$/.test(WHATSAPP_NUMBER)
@@ -36,8 +37,8 @@ export function WhatsApp(){
 export function Footer({onPrivacy}){
  return <footer><div className="wrap fg">
   <div><div className="logo" style={{color:'#fff'}}>NOVARA</div><p>Temporary brand for a prototype. Business solutions, products and project design.</p></div>
-  <div><h4>Explore</h4>{['About','Services','Products','Portfolio','Contact'].map(n=><a key={n} href={`#${n.toLowerCase()}`}>{n}</a>)}</div>
-  <div><h4>Services</h4><a href="#services">Business Consulting</a><a href="#services">Product Sourcing</a><a href="#services">Creative Design</a><a href="#services">Project Execution</a></div>
+  <div><h4>Explore</h4>{['About','Services','Products','Portfolio','Contact'].map(n=><Link key={n} to={`/${n.toLowerCase()}`}>{n}</Link>)}</div>
+  <div><h4>Services</h4><Link to="/services">Business Consulting</Link><Link to="/services">Product Sourcing</Link><Link to="/services">Creative Design</Link><Link to="/services">Project Execution</Link></div>
   <div><h4>Contact (placeholders)</h4><p>[Placeholder] hello@example.com<br/>[Placeholder] +00 000 000 0000<br/>[Placeholder] Street, City, Country</p><button onClick={onPrivacy}>Privacy Policy</button></div></div>
   <p className="wrap fine">© NOVARA prototype. All products, projects and testimonials are samples.</p></footer>
 }
